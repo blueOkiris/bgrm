@@ -16,6 +16,8 @@ make ALT_BUILD_DIR=/tmp/bgrm
 sudo ./bgrm.sh -b ~/Pictures/Wallpapers/ni-skyline-wallpaper.png -H 720
 ```
 
+Note, this will work anywhere WebCams are used.
+
 # Dependencies
 
 Packages:
