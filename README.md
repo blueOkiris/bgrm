@@ -1,8 +1,14 @@
 # Background Remover
 
-## Basic Idea
+## The Need
 
-Teams for Linux doesn't support removable backgrounds. I can fix this though
+It's been good long while since Microsoft first released a Teams version for Linux and yet, one of Teams' coolest features doesn't exist in said Linux version: removable backgrounds. As someone who uses Linux for their daily driver, this annoys me.
+
+Well, I'm an engineer, so of course, I found a solution.
+
+Using OpenCV and a v4l2loopback device (basically a virtual webcam you can write data to), I threw together a Python application last evening that takes your normal webcam input, removes and replaces the background, and outputs that to the created video device. Problem solved :)
+
+## Basic Idea
 
 Take a video camera feed, process it to remove the background, apply a new one, and send it back as a loopback video device.
 
