@@ -50,7 +50,7 @@ def main():
             
             # Write to virtual camera
             virtCam.write(cvtColor(noBgFrame, COLOR_BGR2YUV_I420))
-
+            
             # Display
             stackFrame = cam.stackFrames(frame, noBgFrame)
             if not cam.display(stackFrame):
