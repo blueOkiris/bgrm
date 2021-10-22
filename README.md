@@ -29,6 +29,7 @@ Note, this will work anywhere WebCams are used.
 Packages:
  - make
  - gcc
+ - Linux kernel headers
  - python3.9
  - pip
 
