@@ -6,7 +6,7 @@ It's been good long while since Microsoft first released a Teams version for Lin
 
 Well, I'm an engineer, so of course, I found a solution.
 
-Using OpenCV and a v4l2loopback device (basically a virtual webcam you can write data to), I threw together a Python application last evening that takes your normal webcam input, removes and replaces the background, and outputs that to the created video device. Problem solved :)
+Using OpenCV and a v4l2loopback device (basically a virtual webcam you can write data to), I threw together a Python application that takes your normal webcam input, removes and replaces the background, and outputs that to the created video device. Problem solved :)
 
 ## Basic Idea
 
