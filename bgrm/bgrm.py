@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 
+# Author: Dylan Turner
+# Description: Main loop for bgrm app
+
 # Force a version of OpenCV that works (not all do)
 import pkg_resources
 pkg_resources.require("opencv-python<=4.4.0.46")
