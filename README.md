@@ -30,6 +30,7 @@ Packages:
  - make
  - gcc
  - python3.9
+ - pip
 
 The application is python based, but uses the [v4l2looopback](https://github.com/umlaeute/v4l2loopback) kernel module.
 
