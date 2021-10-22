@@ -3,9 +3,9 @@
 # Author: Dylan Turner
 # Description: Creates and installs all needed packages
 
-pip3 install virtualenv
+python3.9 -m pip install virtualenv
 
-virtualenv .venv
+python3.9 -m virtualenv .venv
 chmod +x .venv/bin/activate
 source .venv/bin/activate
 pip3 install -r bgrm/requirements.txt --no-cache-dir
