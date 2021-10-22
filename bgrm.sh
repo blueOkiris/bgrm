@@ -22,7 +22,7 @@ if [ ! -d ".venv" ]; then
 fi
 
 insmod v4l2loopback.ko \
-    nr_devices=1 exclusive_caps=1 video_nr=10 \
+    devices=1 exclusive_caps=1 video_nr=10 max_buffers=2 \
     card_label=v4l2lo
 
 source .venv/bin/activate

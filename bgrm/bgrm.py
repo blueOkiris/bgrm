@@ -7,10 +7,10 @@
 import pkg_resources
 pkg_resources.require("opencv-python<=4.4.0.46")
 
-from cv2 import imread, resize, copyMakeBorder, BORDER_CONSTANT
+from cv2 import imread, resize, copyMakeBorder, BORDER_CONSTANT, cvtColor, COLOR_BGR2YUV_I420
 from v4l2 import \
     v4l2_format, V4L2_BUF_TYPE_VIDEO_OUTPUT, V4L2_FIELD_NONE, \
-    V4L2_PIX_FMT_BGR24, VIDIOC_S_FMT
+    V4L2_PIX_FMT_YUV420, VIDIOC_S_FMT
 from fcntl import ioctl
 
 from cam import Cam
@@ -28,7 +28,7 @@ def main():
         format = v4l2_format()
         format.type = V4L2_BUF_TYPE_VIDEO_OUTPUT
         format.fmt.pix.field = V4L2_FIELD_NONE
-        format.fmt.pix.pixelformat = V4L2_PIX_FMT_BGR24
+        format.fmt.pix.pixelformat = V4L2_PIX_FMT_YUV420
         format.fmt.pix.width = settings.screenWidth
         format.fmt.pix.height = settings.screenHeight
         format.fmt.pix.bytesperline = settings.screenWidth * cam.channels
@@ -49,7 +49,7 @@ def main():
                 frame, noBgFrame = cam.getFrame(bgImg)
             
             # Write to virtual camera
-            virtCam.write(noBgFrame)
+            virtCam.write(cvtColor(noBgFrame, COLOR_BGR2YUV_I420))
 
             # Display
             stackFrame = cam.stackFrames(frame, noBgFrame)
