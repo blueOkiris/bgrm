@@ -22,8 +22,8 @@ if [ ! -d ".venv" ]; then
 fi
 
 insmod v4l2loopback.ko \
-    devices=1 exclusive_caps=1.1 video_nr=10 \
-    card_label="OpenCV Camera"
+    nr_devices=1 exclusive_caps=1 video_nr=10 \
+    card_label=v4l2lo
 
 source .venv/bin/activate
 python3.9 bgrm \
