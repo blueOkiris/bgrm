@@ -4,6 +4,7 @@
 from cv2 import \
     VideoCapture, resize, namedWindow, moveWindow, imshow, waitKey, \
     destroyAllWindows, imread
+from numpy import shape
 from cvzone import stackImages
 from cvzone.SelfiSegmentationModule import SelfiSegmentation
 
@@ -30,20 +31,19 @@ class Cam:
     def __enter__(self):
         return self
     
-    def getFrame(self):
+    def getFrame(self, bgImg = None):
         _success, frame = self._vidFeed.read()
-        noBgFrame = self._segmentor.removeBG(
-            frame, self._settings.fillColor,
-            threshold = self._settings.rmThresh
-        )
-        return (frame, noBgFrame)
-    
-    def getFrame(self, bgImg):
-        _success, frame = self._vidFeed.read()
-        noBgFrame = self._segmentor.removeBG(
-            frame, bgImg,
-            threshold = self._settings.rmThresh
-        )
+
+        if shape(bgImg) == ():
+            noBgFrame = self._segmentor.removeBG(
+                frame, self._settings.fillColor,
+                threshold = self._settings.rmThresh
+            )
+        else:
+            noBgFrame = self._segmentor.removeBG(
+                frame, bgImg,
+                threshold = self._settings.rmThresh
+            )
         return (frame, noBgFrame)
     
     def stackFrames(self, leftFrame, rightFrame):
