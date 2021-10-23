@@ -19,6 +19,7 @@ class AppSettings:
     fillColor : tuple[float, float, float]
     bgImg : str
     blur : bool
+    disableWin : bool
 
     @staticmethod
     def fromArguments():
@@ -64,7 +65,7 @@ class AppSettings:
             action='store_true'
         )
         parser.add_argument(
-            '--disable-window', help = 'Disable feedback window',
+            '--disable_window', help = 'Disable feedback window',
             action='store_true'
         )
         args = parser.parse_args()
@@ -72,6 +73,6 @@ class AppSettings:
         return AppSettings(
             args.title, args.start_x, args.start_y, args.camera,
             args.width, args.height, args.scale, ord('q'),
-            args.thresh, (0, 0, 0), args.bg, args.blur
+            args.thresh, (0, 0, 0), args.bg, args.blur, args.disable_window
         )
 
