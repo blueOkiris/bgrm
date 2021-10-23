@@ -1,0 +1,4 @@
+src/
+*.tar.xz
+pkg/
+bgrm/
