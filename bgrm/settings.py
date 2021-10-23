@@ -18,6 +18,8 @@ class AppSettings:
     rmThresh : float
     fillColor : tuple[float, float, float]
     bgImg : str
+    blur : bool
+    disableWin : bool
 
     @staticmethod
     def fromArguments():
@@ -58,11 +60,19 @@ class AppSettings:
             '-b', '--bg', type = str, default = '',
             help = 'Background image'
         )
+        parser.add_argument(
+            '--blur', help = 'Blur background (overrides --bg)',
+            action='store_true'
+        )
+        parser.add_argument(
+            '--disable_window', help = 'Disable feedback window',
+            action='store_true'
+        )
         args = parser.parse_args()
 
         return AppSettings(
             args.title, args.start_x, args.start_y, args.camera,
             args.width, args.height, args.scale, ord('q'),
-            args.thresh, (0, 0, 0), args.bg
+            args.thresh, (0, 0, 0), args.bg, args.blur, args.disable_window
         )
 
