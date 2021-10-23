@@ -1,5 +1,7 @@
 # Background Remover
 
+Adapted for Ubuntu/Linux Mint
+
 ## The Need
 
 It's been good long while since Microsoft first released a Teams version for Linux and yet, one of Teams' coolest features doesn't exist in said Linux version: removable backgrounds. As someone who uses Linux for their daily driver, this annoys me.
@@ -37,8 +39,6 @@ sudo chmod g+rw /dev/video*
 Make sure your user is in the `video` group.
 
 # Dependencies
-
-Adapted for Ubuntu 
 
  - python >= 3.9
  - pip3
