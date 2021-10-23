@@ -10,20 +10,6 @@ Well, I'm an engineer, so of course, I found a solution.
 
 Using OpenCV and a v4l2loopback device (basically a virtual webcam you can write data to), I threw together a Python application that takes your normal webcam input, removes and replaces the background, and outputs that to the created video device. Problem solved :)
 
-## How to Use
-
-1. Setup
-   - First time you set up you need to do the following
-   - Create the proper virtual environment with `./scripts/setup-env.sh`
-   - Patch the v4l2 library `./scripts/patch-v4l2-py-mod.sh`
-
-2. Run
-   - After setting up, you can run the application
-   - Run with `./bgrm.sh <options>` (use `--help` to see all options)
-   - Example: `./bgrm.sh -b ~/Pictures/Wallpapers/ni-skyline-wallpaper.png -w 320 -H 240 -s 2.0`
-
-Note, this will work anywhere WebCams are used.
-
 # Module installation
 
 As root:
@@ -38,6 +24,20 @@ sudo chmod g+rw /dev/video*
 ```
 
 Make sure your user is in the `video` group.
+
+## How to Use
+
+1. Setup
+   - First time you set up you need to do the following
+   - Create the proper virtual environment with `./scripts/setup-venv.sh`
+   - Patch the v4l2 library `./scripts/patch-v4l2-py-mod.sh`
+
+2. Run
+   - After setting up, you can run the application
+   - Run with `./bgrm.sh <options>` (use `--help` to see all options)
+   - Example: `./bgrm.sh -b ~/Pictures/Wallpapers/ni-skyline-wallpaper.png -w 320 -H 240 -s 2.0`
+
+Note, this will work anywhere WebCams are used.
 
 # Dependencies
 
