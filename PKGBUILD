@@ -1,7 +1,7 @@
 # Maintainer: Dylan Turner dylantdmt@gmail.com
 pkgname=bgrm-git
 pkgver=21.1023
-pkgrel=1322
+pkgrel=1350
 epoch=
 pkgdesc="A utility for removing backgrounds from a webcam and returning a virtual webcam for use in applications like Teams, OBS, etc"
 arch=('any')
@@ -33,7 +33,12 @@ package() {
     cp -r bgrm/.venv "$pkgdir/opt/bgrm"
 
     mkdir -p "$pkgdir/usr/bin"
-    
+
     echo "Creating link in $pkgdir/usr/bin"
-    ln -s bgrm/bgrm.sh "$pkgdir/usr/bin/bgrm"
+    cat <<EOF > "$pkgdir/usr/bin/bgrm"
+#!/bin/bash
+cd /opt/bgrm
+source bgrm.sh
+EOF
+    chmod +x "$pkgdir/usr/bin/bgrm"
 }
