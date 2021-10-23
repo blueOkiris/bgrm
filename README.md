@@ -34,6 +34,8 @@ sudo chown root.video /dev/video*
 sudo chmod g+rw /dev/video*
 ```
 
+Make sure your user is in the `video` group.
+
 # Dependencies
 
 Adapted for Ubuntu 
