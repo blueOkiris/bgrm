@@ -63,6 +63,10 @@ class AppSettings:
             '--blur', help = 'Blur background (overrides --bg)',
             action='store_true'
         )
+        parser.add_argument(
+            '--disable-window', help = 'Disable feedback window',
+            action='store_true'
+        )
         args = parser.parse_args()
 
         return AppSettings(
