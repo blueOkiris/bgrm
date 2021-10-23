@@ -12,13 +12,10 @@ Using OpenCV and a v4l2loopback device (basically a virtual webcam you can write
 
 Take a video camera feed, process it to remove the background, apply a new one, and send it back as a loopback video device.
 
-Buld the kernel module first with `make` (see dependency notes below!)
-
 Run with `sudo ./bgrm.sh <options>`
 
 Example: 
 ```
-make ALT_BUILD_DIR=/tmp/bgrm
 sudo ./bgrm.sh -b ~/Pictures/Wallpapers/ni-skyline-wallpaper.png -H 720
 ```
 
