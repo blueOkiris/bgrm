@@ -17,13 +17,15 @@ Using OpenCV and a v4l2loopback device (basically a virtual webcam you can write
 
 2. Run
    - After setting up, you can run the application
-   - Run with `sudo ./bgrm.sh <options>` (use `--help` to see all options)
-   - Example: `sudo ./bgrm.sh -b ~/Pictures/Wallpapers/ni-skyline-wallpaper.png -w 320 -H 240 -s 2.0`
+   - Run with `./bgrm.sh <options>` (use `--help` to see all options)
+   - Example: `./bgrm.sh -b ~/Pictures/Wallpapers/ni-skyline-wallpaper.png -w 320 -H 240 -s 2.0`
 
 Note, this will work anywhere WebCams are used.
 
 # Dependencies
 
+Adapted for Ubuntu 
+
  - python >= 3.9
- - pip
+ - pip3
  - v4l2loopback-dkms
