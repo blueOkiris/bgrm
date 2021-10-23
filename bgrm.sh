@@ -3,12 +3,14 @@
 # Author: Dylan Turner
 # Description: Run everything
 
-if [ $(id -u) != "0" ]; then
-    echo "You need to be root to run bgrm!"
-    exit 1
+if lsmod|grep v4l2loopback ; then
+        sudo rmmod v4l2loopback
 fi
 
-modprobe v4l2loopback \
+sudo chown root.video /dev/video*
+sudo chmod g+rw /dev/video*
+
+sudo modprobe v4l2loopback \
     devices=1 exclusive_caps=1 video_nr=10 max_buffers=2 \
     card_label=v4l2lo
 
@@ -18,3 +20,5 @@ python3.9 bgrm \
     ${12} ${13} ${14} ${15} ${16} ${17} ${18} ${19} ${20} ${21} ${22} \
     ${23} ${24} ${25} ${26}
 deactivate
+
+sudo rmmod v4l2loopback
