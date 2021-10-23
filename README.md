@@ -22,6 +22,15 @@ Using OpenCV and a v4l2loopback device (basically a virtual webcam you can write
 
 Note, this will work anywhere WebCams are used.
 
+# Module installation
+
+As root:
+
+```
+echo v4l2loopback > /etc/modules-load.d/v4l2loopback.conf
+echo options v4l2loopback ... > /etc/modprobe.d/v4l2loopback.conf
+```
+
 # Dependencies
 
 Adapted for Ubuntu 
