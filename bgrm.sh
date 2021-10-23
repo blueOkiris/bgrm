@@ -4,16 +4,8 @@
 # Description: Run everything
 
 if [ $(id -u) != "0" ]; then
-    echo "You need to be root to run this script!"
+    echo "You need to be root to run bgrm!"
     exit 1
-fi
-
-if [ ! -d ".venv" ]; then
-    echo "Initializing virtual environment!"
-    source scripts/setup-venv.sh
-
-    # Patch for python 3.9
-    cp scripts/v4l2\ \(patch\).py .venv/lib/python3.9/site-packages/v4l2.py
 fi
 
 modprobe v4l2loopback \
