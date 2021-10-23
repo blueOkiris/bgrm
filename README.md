@@ -29,6 +29,9 @@ As root:
 ```
 echo v4l2loopback > /etc/modules-load.d/v4l2loopback.conf
 echo options v4l2loopback devices=1 exclusive_caps=1 video_nr=10 max_buffers=2 card_label=FakeCam > /etc/modprobe.d/v4l2loopback.conf
+
+sudo chown root.video /dev/video*
+sudo chmod g+rw /dev/video*
 ```
 
 # Dependencies
