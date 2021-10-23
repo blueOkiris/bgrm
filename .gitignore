@@ -1,4 +1,4 @@
 src/
-*.tar.xz
+*.tar*
 pkg/
 bgrm/
