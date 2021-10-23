@@ -21,12 +21,13 @@ class Cam:
         _success, baseFrame = self._vidFeed.read()
         _height, _width, self.channels = baseFrame.shape
 
-        # Set window to be at a specific spot
-        namedWindow(self._settings.winTitle)
-        moveWindow(
-            self._settings.winTitle,
-            self._settings.winStartX, self._settings.winStartY
-        )
+        if not settings.disableWin:
+            # Set window to be at a specific spot
+            namedWindow(self._settings.winTitle)
+            moveWindow(
+                self._settings.winTitle,
+                self._settings.winStartX, self._settings.winStartY
+            )
     
     def __enter__(self):
         return self
@@ -57,7 +58,8 @@ class Cam:
         )
     
     def display(self, frame):
-        imshow(self._settings.winTitle, frame)
+        if not self._settings.disableWin:
+            imshow(self._settings.winTitle, frame)
 
         if waitKey(1) & 0xFF == self._settings.quitKey:
             return False
