@@ -12,7 +12,7 @@ Using OpenCV and a v4l2loopback device (basically a virtual webcam you can write
 
 1. Setup
    - First time you set up you need to do the following
-   - Create the proper virtual environment with `./scripts/setup-env.sh`
+   - Create the proper virtual environment with `./scripts/setup-venv.sh`
    - Patch the v4l2 library `./scripts/patch-v4l2-py-mod.sh`
 
 2. Run
