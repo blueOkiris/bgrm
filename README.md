@@ -27,3 +27,9 @@ Note, this will work anywhere WebCams are used.
  - python >= 3.9
  - pip
  - v4l2loopback-dkms
+
+## Current State
+
+As a package, this project has become relatively stable for me (considering it started as a little baby script just barely functioning), so I'm pretty much done use-case-wise. This was always a personal project intended for my own use, and it has reached the point where I can easily use it for daily use, so major features are probably done at this point.
+
+So where to go now? The plan from here on out is just to help others to get the software running and possibly package it for other systems. If you'd like other features, then you're absolutely welcome to fork the project and make your own additions (I'll consider pull requests into this repo as well), but for now, I'm shifting gears to maintenance.
