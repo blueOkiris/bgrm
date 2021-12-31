@@ -1,5 +1,4 @@
-opencv-python==4.4.0.46
-opencv-contrib-python==4.4.0.46
-mediapipe==0.8.8.1
-cvzone==1.5.2
+opencv-python==4.5.5.62
+mediapipe==0.8.9.1
+cvzone==1.5.3
 v4l2==0.2

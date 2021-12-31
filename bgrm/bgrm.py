@@ -4,8 +4,6 @@
 # Description: Main loop for bgrm app
 
 # Force a version of OpenCV that works (not all do)
-import pkg_resources
-pkg_resources.require("opencv-python<=4.4.0.46")
 
 from cv2 import GaussianBlur, imread, resize, copyMakeBorder, \
     BORDER_CONSTANT, cvtColor, COLOR_BGR2YUV_I420
