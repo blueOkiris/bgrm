@@ -25,7 +25,7 @@ fn main() {
 
     // Initialize kernel module
     println!("Initializing v4l2loopback kernel module...");
-    let output = Command::new("sh")
+    let mut output = Command::new("sh")
         .arg("-c")
         .arg(
             "modprobe v4l2loopback \\
@@ -33,9 +33,7 @@ fn main() {
                 card_label=v4l2lo"
         )
         .output()
-        .expect(
-            "Failed to initialize v4l2loopback module!"
-        );
+        .expect("Failed to initialize v4l2loopback module!");
     println!("Output from kernel module initialization: {:?}.", output.stdout);
 
     // Set a background image if one was provided

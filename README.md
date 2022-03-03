@@ -15,10 +15,11 @@ __Setup:__
 2. Build with `cargo build --release`. The binary will be in target/release/bgrm
 3. Move it to /bin
 4. Run `pip install --user virtualenv`
-5. Create a python virtualenv in \~/.bgrm/ with `mkdir ~/.bgrm; cd ~/.bgrm; virtualenv .venv`
-6. Source the virtualenv with `source ~/.bgrm/.venv/bin/activate`
+5. Create a python virtualenv in /opt/.bgrm/ with `sudo mkdir -p /opt/.bgrm; sudo chown $USER: /opt/.bgrm; cd /opt/.bgrm; virtualenv .venv`
+6. Source the virtualenv with `source /opt/.bgrm/.venv/bin/activate`
 7. Run `pip install cvzone`
-8. Run `deactivate`
+8. Link the cvzone package to .venv/lib: `ln -s /opt/.bgrm/.venv/lib/<insert python version>/site-packages/ /opt/.bgrm/.venv/lib/site-packages/`
+9. Run `deactivate`
 
 __Running:__
 `sudo bgrm <options>` (use `--help` to see all the options)
