@@ -10,17 +10,35 @@ Using OpenCV and a v4l2loopback device (basically a virtual webcam you can write
 
 ## How to Use
 
-1. Build with `cargo build --release`. The binary will be in target/release/bgrm
-2. Move it to /bin
-3. Run as `sudo bgrm <options>` (use `--help` to see all the options)
+__Setup:__
+1. Install dependencies
+2. Build with `cargo build --release`. The binary will be in target/release/bgrm
+3. Move it to /bin
+4. Run `pip install --user virtualenv`
+5. Create a python virtualenv in \~/.bgrm/ with `mkdir ~/.bgrm; cd ~/.bgrm; virtualenv .venv`
+6. Source the virtualenv with `source ~/.bgrm/.venv/bin/activate`
+7. Run `pip install cvzone`
+8. Run `deactivate`
+
+__Running:__
+`sudo bgrm <options>` (use `--help` to see all the options)
   - Example: `sudo bgrm -b ~/Pictures/Wallpapers/wallpaper.png -w 320 -H 240 -s 2.0`
 
-## Dependencies
+__Dependencies:__
 
-- Arch Linux
+Non-Python dependencies:
+- Linux
 - cargo
 - v4l2loopback-dkms
 - opencv
+- python > 3.6
+- python3-pip (to install deps)
+
+Python Dependencies (i.e. pip):
+- virtualenv
+- cvzone >= 1.5.6 (requires Python > 3.6)
+
+##
 
  - python >= 3.9
  - pip

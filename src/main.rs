@@ -6,6 +6,7 @@
 mod settings;
 mod cam;
 
+use std::process::Command;
 use opencv::{
     imgproc::{
         resize
@@ -21,6 +22,21 @@ use crate::settings::settings;
 
 fn main() {
     let settings = settings();
+
+    // Initialize kernel module
+    println!("Initializing v4l2loopback kernel module...");
+    let output = Command::new("sh")
+        .arg("-c")
+        .arg(
+            "modprobe v4l2loopback \\
+                devices=1 exclusive_caps=1 video_nr=10 max_buffers=2 \\
+                card_label=v4l2lo"
+        )
+        .output()
+        .expect(
+            "Failed to initialize v4l2loopback module!"
+        );
+    println!("Output from kernel module initialization: {:?}.", output.stdout);
 
     // Set a background image if one was provided
     let mut bg_img = None;

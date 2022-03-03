@@ -10,6 +10,5 @@ use clap::ArgMatches;
 
 struct Cam {
     settings: ArgMatches,
-    vid_feed: VideoCapture,
-    segmentor: SelfiSegmentor
+    vid_feed: VideoCapture
 }

@@ -1,8 +1,2 @@
-*__pycache__*
-*.ko
-*.venv*
-
-
-# Added by cargo
-
-/target
+target/
+*.lock
