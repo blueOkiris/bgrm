@@ -18,7 +18,10 @@ use opencv::{
     }
 };
 use clap::ArgMatches;
-use crate::settings::settings;
+use crate::{
+    settings::settings,
+    cam::Cam
+};
 
 fn main() {
     let settings = settings();
@@ -42,12 +45,12 @@ fn main() {
         bg_img = Some(get_correctly_sized_bg(&settings.clone()))
     }
 
-    //let cam = Camera::from_settings(&settings.clone());
+    let mut cam = Cam::new(&settings.clone());
     //TODO: let virt_cam = open /dev/video10 for writing BINARILY
     //format_virt_cam(&settings.clone(), virt_cam)
 
     loop {
-        //let (frame, mut no_bg_frame) = cam.get_frame(&settings.clone());
+        let (frame, mut no_bg_frame) = cam.get_frame(&bg_img.clone());
         /*
         // Reapply background, but blurred, if blur enabled
         if settings.blur {
@@ -95,9 +98,8 @@ fn get_correctly_sized_bg(settings: &ArgMatches) -> Mat {
     );
 
     // Scale down
-    let mut start_x = 0;
     if new_width > screen_width as i32 {
-        start_x = (new_width - screen_width as i32) / 2;
+        let start_x = (new_width - screen_width as i32) / 2;
         let end_x = new_width - start_x;
         bg_img = bg_img
             .row_range(&Range::new(0, screen_height as i32).unwrap()).expect(
