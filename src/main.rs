@@ -10,11 +10,10 @@ use std::process::Command;
 use opencv::{
     imgproc::resize,
     imgcodecs::imread,
-    highgui::imshow,
     prelude::MatTraitConst,
     core::{
         copy_make_border, Size_, BORDER_CONSTANT, Mat, Range, VecN
-    }
+    }, Result
 };
 use clap::ArgMatches;
 use crate::{
@@ -22,7 +21,7 @@ use crate::{
     cam::Cam
 };
 
-fn main() {
+fn main() -> Result<()> {
     let settings = settings();
 
     // Initialize kernel module
@@ -44,12 +43,12 @@ fn main() {
         bg_img = Some(get_correctly_sized_bg(&settings.clone()))
     }
 
-    let mut cam = Cam::new(&settings.clone());
+    let mut cam = Cam::new(&settings.clone())?;
     //TODO: let virt_cam = open /dev/video10 for writing BINARILY
     //format_virt_cam(&settings.clone(), virt_cam)
 
     loop {
-        let (frame, mut no_bg_frame) = cam.get_frame(&bg_img.clone());
+        let (frame, mut no_bg_frame) = cam.get_frame(&bg_img.clone())?;
         /*
         // Reapply background, but blurred, if blur enabled
         if settings.blur {
@@ -62,14 +61,15 @@ fn main() {
         //virt_cam.write(cvt_color(no_bg_frame, COLOR_BGR2YUV_I420)
 
         // Display
-        imshow(settings.value_of("title").unwrap(), &frame).expect(
-            "Failed to show frame!"
-        );
+        
         //let stack_frame = cam.stack_frames(frame, no_bg_frame)
-        /*if !cam.display(stack_frame)
+        let stack_frame = no_bg_frame;
+        if !cam.display(&stack_frame)? {
             break;
-        }*/
+        }
     }
+
+    Ok(())
 }
 
 fn get_correctly_sized_bg(settings: &ArgMatches) -> Mat {
