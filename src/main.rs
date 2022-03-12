@@ -8,11 +8,10 @@ mod cam;
 
 use std::process::Command;
 use opencv::{
-    imgproc::{
-        resize
-    }, imgcodecs::{
-        imread
-    }, prelude::MatTraitConst,
+    imgproc::resize,
+    imgcodecs::imread,
+    highgui::imshow,
+    prelude::MatTraitConst,
     core::{
         copy_make_border, Size_, BORDER_CONSTANT, Mat, Range, VecN
     }
@@ -63,6 +62,9 @@ fn main() {
         //virt_cam.write(cvt_color(no_bg_frame, COLOR_BGR2YUV_I420)
 
         // Display
+        imshow(settings.value_of("title").unwrap(), &frame).expect(
+            "Failed to show frame!"
+        );
         //let stack_frame = cam.stack_frames(frame, no_bg_frame)
         /*if !cam.display(stack_frame)
             break;

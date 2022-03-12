@@ -6,19 +6,16 @@
 use opencv::{
     core::Mat,
     videoio::VideoCapture,
-    prelude::VideoCaptureTrait
+    prelude::{
+        VideoCaptureTrait, BackgroundSubtractor, BackgroundSubtractorGMG
+    }, bgsegm::create_background_subtractor_gmg
 };
 use clap::ArgMatches;
-use pyo3::{
-    Python, PyResult, prepare_freethreaded_python,
-    types::{
-        PyList, PyModule
-    }
-};
 
 pub struct Cam {
     settings: ArgMatches,
-    vid_feed: VideoCapture
+    vid_feed: VideoCapture,
+    subtractor: Box<dyn BackgroundSubtractorGMG>
 }
 
 /*
@@ -35,60 +32,33 @@ const VIRT_ENV_PATH: &'static str = "/opt/.bgrm/.venv/lib/site-packages/";
 impl Cam {
     pub fn new(settings: &ArgMatches) -> Cam {
         let vid_feed = VideoCapture::new(
-            settings.value_of("camera").unwrap().parse::<i32>().expect(
-                "Invalid '--camera' provided!"
-            ), 0
+            0, 0
         ).expect("Failed to create video feed!");
+
+        let mut subtractor = create_background_subtractor_gmg(
+            30, settings.value_of("thresh").unwrap().parse::<f64>().expect(
+                "Could not parse threshold value!"
+            )
+        ).expect("Failed to create background subtracter!");
 
         Cam {
             settings: settings.clone(),
-            vid_feed
+            vid_feed,
+            subtractor: Box::new(subtractor)
         }
     }
 
     pub fn get_frame(&mut self, bg_img: &Option<Mat>) -> (Mat, Mat) {
-        let mut frame: Mat = Mat::default();
+        let mut frame = Mat::default();
         self.vid_feed.read(&mut frame).expect("Failed to get frame.");
-
-        let no_bg_frame: PyResult<Mat> = if bg_img.is_none() {
-            // Just remove background
-            let frame_clone = frame.clone();
-            prepare_freethreaded_python();
-            Python::with_gil(move |py| {
-                // Add our virtual env to path
-                let sys = py.import("sys")?;
-                let path: &PyList = sys.getattr("path")?.extract()?;
-                path.append(VIRT_ENV_PATH)?;
-                sys.setattr("path", path)?;
-
-                // Use the cvzone library
-                let segment_mod: &PyModule =
-                    py.import("cvzone.SelfiSegmentationModule")?.extract()?;
-                let selfi_segment =
-                    segment_mod.getattr("SelfiSegmentation")?;
-                selfi_segment.call0()?;
-
-                // Remove the bg with the library
-                let arg_list = PyList::new(py, Vec::new());
-                arg_list.call_method1("insert", (0, frame));
-                selfi_segment.call_method1(
-                    "removeBG", arg_list
-                )?;
-
-                Ok(frame_clone)
-            })
-        } else {
-            // Replace background
-            let frame_clone = frame.clone();
-            prepare_freethreaded_python();
-            Python::with_gil(move |py| {
-                let sys = py.import("sys")?;
-                let path = sys.getattr("version")?;
-
-                Ok(frame_clone)
-            })
-        };
+        let mut no_bg_frame = Mat::default();
+        /*self.subtractor.apply(&frame, &mut no_bg_frame, -1.0).expect(
+            "Failed to remove background!"
+        );*/
+        if bg_img.is_none() {
+            
+        }
         
-        (frame, no_bg_frame.expect("Failed to remove background!"))
+        (frame, no_bg_frame)
     }
 }
