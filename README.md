@@ -40,13 +40,6 @@ Non-Python dependencies:
 - v4l2loopback-dkms
 - opencv4
 - ffmpeg
-- bazel
-- mediapipe C++ lib (there's no package for this :/)
-  1. `git clone https://github.com/google/mediapipe.git` (takes a long time)
-  2. `cd mediapipe`
-  3. Modify third_party/opencv_linux.BUILD to specify x86_64-linux-gnu (uncomment lines 20 and 27)
-  4. Modify .bazelversion to match your bazel (mine was at 5.1.0 while the project required 5.0.0)
-  5. Set your openjdk-11 java home (java is not a direct dependency, but it is a dependency for bazel). For me that's `export JAVA_HOME=/usr/lib/jvm/java-11-openjdk/`
-  6. ``
-  7. Copy to /usr/share/lib
-    - 
+- python >= 3.6
+- python-pip
+- cvzone 1.5.6 pip package: `pip install cvzone==1.5.6 --user`
