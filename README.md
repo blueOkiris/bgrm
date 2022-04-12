@@ -13,17 +13,24 @@ Using OpenCV and a v4l2loopback device (basically a virtual webcam you can write
 __Setup:__
 1. Install dependencies
 2. Build with `cargo build --release`. The binary will be in target/release/bgrm
-3. Move it to /bin
-4. Run `pip install --user virtualenv`
-5. Create a python virtualenv in /opt/.bgrm/ with `sudo mkdir -p /opt/.bgrm; sudo chown $USER: /opt/.bgrm; cd /opt/.bgrm; virtualenv .venv`
-6. Source the virtualenv with `source /opt/.bgrm/.venv/bin/activate`
-7. Run `pip install cvzone`
-8. Link the cvzone package to .venv/lib: `ln -s /opt/.bgrm/.venv/lib/<insert python version>/site-packages/ /opt/.bgrm/.venv/lib/site-packages/`
-9. Run `deactivate`
+3. Move it to /usr/bin
 
 __Running:__
+
+Either:
+
 `sudo bgrm <options>` (use `--help` to see all the options)
   - Example: `sudo bgrm -b ~/Pictures/Wallpapers/wallpaper.png -w 320 -H 240 -s 2.0`
+
+Or, if you don't want to use sudo everytime, manually set up the v4l2looback module (there's a way to make it permanent):
+
+```
+modprobe v4l2loopback \
+   devices=1 exclusive_caps=1 video_nr=10 max_buffers=2 \
+   card_label=v4l2lo
+```
+
+And then run like before, but without sudo
 
 __Dependencies:__
 
@@ -31,31 +38,15 @@ Non-Python dependencies:
 - Linux
 - cargo
 - v4l2loopback-dkms
-- opencv
-- python > 3.6
-- python3-pip (to install deps)
-
-Python Dependencies (i.e. pip):
-- virtualenv
-- cvzone >= 1.5.6 (requires Python > 3.6)
-
-##
-
- - python >= 3.9
- - pip
- - v4l2loopback-dkms
-
-
-$$
-
-1. Setup
-   - First time you set up you need to do the following
-   - Create the proper virtual environment with `./scripts/setup-env.sh`
-   - Patch the v4l2 library `./scripts/patch-v4l2-py-mod.sh`
-
-2. Run
-   - After setting up, you can run the application
-   - Run with `sudo ./bgrm.sh <options>` (use `--help` to see all options)
-   - Example: `sudo ./bgrm.sh -b ~/Pictures/Wallpapers/ni-skyline-wallpaper.png -w 320 -H 240 -s 2.0`
-
-Note, this will work anywhere WebCams are used.
+- opencv4
+- ffmpeg
+- bazel
+- mediapipe C++ lib (there's no package for this :/)
+  1. `git clone https://github.com/google/mediapipe.git` (takes a long time)
+  2. `cd mediapipe`
+  3. Modify third_party/opencv_linux.BUILD to specify x86_64-linux-gnu (uncomment lines 20 and 27)
+  4. Modify .bazelversion to match your bazel (mine was at 5.1.0 while the project required 5.0.0)
+  5. Set your openjdk-11 java home (java is not a direct dependency, but it is a dependency for bazel). For me that's `export JAVA_HOME=/usr/lib/jvm/java-11-openjdk/`
+  6. ``
+  7. Copy to /usr/share/lib
+    - 

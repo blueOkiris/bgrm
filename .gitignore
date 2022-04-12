@@ -1,2 +1,6 @@
+# Rust stuff
 target/
 *.lock
+
+# Mediapipe development
+mediapipe/

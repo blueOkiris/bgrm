@@ -8,9 +8,8 @@ use opencv::{
     videoio::{
         VideoCapture, CAP_ANY, VideoCaptureTraitConst
     }, prelude::{
-        VideoCaptureTrait, BackgroundSubtractorMOG2
-    }, video::create_background_subtractor_mog2,
-    highgui::{
+        VideoCaptureTrait
+    }, highgui::{
         imshow, wait_key
     }, 
     Result
@@ -19,8 +18,7 @@ use clap::ArgMatches;
 
 pub struct Cam {
     settings: ArgMatches,
-    vid_feed: VideoCapture,
-    subtractor: Box<dyn BackgroundSubtractorMOG2>
+    vid_feed: VideoCapture
 }
 
 impl Cam {
@@ -34,16 +32,9 @@ impl Cam {
             panic!("Unable to open camera!");
         }
 
-        let subtractor = create_background_subtractor_mog2(
-            1000, settings.value_of("thresh").unwrap().parse::<f64>().expect(
-                "Could not parse threshold value!"
-            ), true
-        )?;
-
         Ok(Cam {
             settings: settings.clone(),
-            vid_feed,
-            subtractor: Box::new(subtractor)
+            vid_feed
         })
     }
 
@@ -51,9 +42,9 @@ impl Cam {
         let mut frame = Mat::default();
         self.vid_feed.read(&mut frame)?;
         let mut no_bg_frame = Mat::default();
-        BackgroundSubtractorMOG2::apply(
-            self.subtractor.as_mut(), &frame, &mut no_bg_frame, -1.0
-        )?;
+
+        // TODO: Rm bg
+
         if bg_img.is_none() {
             
         }

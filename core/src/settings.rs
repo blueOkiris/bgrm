@@ -96,5 +96,10 @@ pub fn settings() -> ArgMatches {
                 .long("disable_window")
                 .takes_value(false)
                 .help("Don't show a popup window")
+        ).arg(
+            Arg::new("no_modprobe")
+                .long("no_modprobe")
+                .takes_value(false)
+                .help("Don't call modprobe")
         ).get_matches()
 }
