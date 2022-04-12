@@ -15,6 +15,7 @@ use opencv::{
     Result
 };
 use clap::ArgMatches;
+use crate::bgrm::remove_bg;
 
 pub struct Cam {
     settings: ArgMatches,
@@ -41,7 +42,7 @@ impl Cam {
     pub fn get_frame(&mut self, bg_img: &Option<Mat>) -> Result<(Mat, Mat)> {
         let mut frame = Mat::default();
         self.vid_feed.read(&mut frame)?;
-        let mut no_bg_frame = Mat::default();
+        let mut no_bg_frame = remove_bg(frame);
 
         // TODO: Rm bg
 

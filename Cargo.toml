@@ -8,6 +8,8 @@ edition = "2021"
 [dependencies]
 opencv = "0.63.0"
 clap = { version = "3.1.5", features = [ "cargo" ] }
+pyo3 = { version = "0.16.3", features = [ "auto-initialize", "extension-module" ] }
+numpy = "0.16"
 
 [[bin]]
 name = "bgrm"

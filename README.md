@@ -40,6 +40,6 @@ Non-Python dependencies:
 - v4l2loopback-dkms
 - opencv4
 - ffmpeg
-- python >= 3.6
+- python >= 3.7
 - python-pip
 - cvzone 1.5.6 pip package: `pip install cvzone==1.5.6 --user`

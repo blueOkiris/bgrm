@@ -5,6 +5,7 @@
 
 mod settings;
 mod cam;
+mod bgrm;
 
 use std::process::Command;
 use opencv::{
