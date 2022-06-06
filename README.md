@@ -11,11 +11,18 @@ Using OpenCV and a v4l2loopback device (basically a virtual webcam you can write
 ## How to Use
 
 1. Setup
-   - First time you set up you need to do the following
+   - First time you set up you need to do the following (make sure you own the folder):
    - Create the proper virtual environment with `./scripts/setup-venv.sh`
    - Patch the v4l2 library `./scripts/patch-v4l2-py-mod.sh`
 
-2. Run
+2. Configure v4l2loopback:
+    - ```
+      export DEVICE_ARR=(`ls /sys/devices/virtual/video4linux | tr -d 'video'`); \
+      modprobe v4l2loopback \
+          devices=1 exclusive_caps=1 video_nr=${DEVICE_ARR[1]} max_buffers=2 \
+          card_label=v4l2lo
+      ```
+3. Run
    - After setting up, you can run the application
    - Run with `sudo ./bgrm.sh <options>` (use `--help` to see all options)
    - Example: `sudo ./bgrm.sh -b ~/Pictures/Wallpapers/ni-skyline-wallpaper.png -w 320 -H 240 -s 2.0`
