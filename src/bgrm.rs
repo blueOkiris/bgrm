@@ -45,7 +45,7 @@ def remove_bg(img):
 
         Ok(Vec::new())
     })
-}
+}x
 
 pub fn remove_bg(frame: &Mat) -> Mat {
     let raw = mat_to_arr(frame);
