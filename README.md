@@ -22,6 +22,7 @@ Using OpenCV and a v4l2loopback device (basically a virtual webcam you can write
           devices=1 exclusive_caps=1 video_nr=${DEVICE_ARR[1]} max_buffers=2 \
           card_label=v4l2lo
       ```
+
 3. Run
    - After setting up, you can run the application
    - Run with `sudo ./bgrm.sh <options>` (use `--help` to see all options)
