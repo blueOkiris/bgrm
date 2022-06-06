@@ -7,23 +7,30 @@ from argparse import ArgumentParser
 
 @dataclass
 class AppSettings:
-    winTitle : str
-    winStartX : int
-    winStartY : int
-    camera : int
-    screenWidth : int
-    screenHeight : int
-    viewScale : float
-    quitKey : int
-    rmThresh : float
-    fillColor : tuple[float, float, float]
-    bgImg : str
-    blur : bool
-    disableWin : bool
+    virt_dev: int
+    winTitle: str
+    winStartX: int
+    winStartY: int
+    camera: int
+    screenWidth: int
+    screenHeight: int
+    viewScale: float
+    quitKey: int
+    rmThresh: float
+    fillColor: tuple[float, float, float]
+    bgImg: str
+    blur: bool
+    disableWin: bool
 
     @staticmethod
     def fromArguments():
         parser = ArgumentParser()
+
+        # Argument from bgrm.sh
+        parser.add_argument(
+            'virt_dev', metavar = 'VIRT_DEV', type = int,
+            help = 'INTERNALLY SET. PLEASE IGNORE'
+        )
 
         # Set up arguments
         parser.add_argument(
@@ -33,10 +40,6 @@ class AppSettings:
         parser.add_argument(
             '-b', '--bg', type = str, default = '',
             help = 'Background image'
-        )
-        parser.add_argument(
-            '-c', '--camera', type = int, default = 0,
-            help = 'ID of camera device to use for input'
         )
         parser.add_argument(
             '-T', '--thresh', type = float, default = 0.4,
@@ -82,7 +85,7 @@ class AppSettings:
         args = parser.parse_args()
 
         return AppSettings(
-            args.title, args.start_x, args.start_y, args.camera,
+            args.virt_dev, args.title, args.start_x, args.start_y, args.camera,
             args.width, args.height, args.scale, ord('q'),
             args.thresh, (0, 0, 0), args.bg, args.blur, args.disable_window
         )
