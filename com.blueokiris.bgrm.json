@@ -1,8 +1,8 @@
 {
     "app-id": "com.blueokiris.bgrm",
-    "runtime": "org.kde.Platform",
-    "runtime-version": "6.2",
-    "sdk": "org.kde.Sdk",
+    "runtime": "org.freedesktop.Platform",
+    "runtime-version": "21.08",
+    "sdk": "org.freedesktop.Sdk",
     "command": "bgrm-fp.sh",
     "finish-args": [
         "--device=all",
