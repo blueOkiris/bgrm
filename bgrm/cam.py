@@ -3,7 +3,7 @@
 
 from cv2 import \
     VideoCapture, resize, namedWindow, moveWindow, imshow, waitKey, \
-    destroyAllWindows, imread, CAP_FFMPEG
+    destroyAllWindows, imread
 from numpy import shape
 from cvzone import stackImages
 from cvzone.SelfiSegmentationModule import SelfiSegmentation
