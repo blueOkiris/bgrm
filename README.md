@@ -20,7 +20,7 @@ Dependencies:
     - v4l2loopback
 
 1. Install - `flatpak-builder --install --user --force-clean build-dir com.blueokiris.bgrm.json`
-2. Configure v4l2loopback:
+2. Configure v4l2loopback (may not be necessary):
     - Recommended:
     ```
     export DEVICE_ARR=(`ls /sys/devices/virtual/video4linux | tr -d 'video'`); \
@@ -43,7 +43,7 @@ Dependencies:
    - First time you set up you need to do the following (make sure you own the folder):
    - Create the proper virtual environment with `./scripts/setup-venv.sh`
    - Patch the v4l2 library `./scripts/patch-v4l2-py-mod.sh`
-2. Configure v4l2loopback:
+2. Configure v4l2loopback (may not be necessary):
     - Recommended:
     ```
     export DEVICE_ARR=(`ls /sys/devices/virtual/video4linux | tr -d 'video'`); \
