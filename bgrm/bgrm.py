@@ -20,7 +20,7 @@ def main():
     # Setup a background image to plug into the cam functions
     if settings.bgImg != '':
         bgImg = getCorrectlySizedBg(settings)
-    
+
     with Cam(settings) as cam, open('/dev/video' + str(settings.virt_dev), 'wb') as virtCam:
         formatVirtualCamera(settings, virtCam, cam)
 
