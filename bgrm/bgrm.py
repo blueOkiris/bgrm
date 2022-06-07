@@ -3,9 +3,8 @@
 # Author: Dylan Turner
 # Description: Main loop for bgrm app
 
-# Force a version of OpenCV that works (not all do)
-
-from cv2 import GaussianBlur, imread, resize, copyMakeBorder, \
+from cv2 import \
+    GaussianBlur, imread, resize, copyMakeBorder, \
     BORDER_CONSTANT, cvtColor, COLOR_BGR2YUV_I420
 from v4l2 import \
     v4l2_format, V4L2_BUF_TYPE_VIDEO_OUTPUT, V4L2_FIELD_NONE, \
@@ -21,8 +20,8 @@ def main():
     # Setup a background image to plug into the cam functions
     if settings.bgImg != '':
         bgImg = getCorrectlySizedBg(settings)
-    
-    with Cam(settings) as cam, open('/dev/video10', 'wb') as virtCam:
+
+    with Cam(settings) as cam, open('/dev/video' + str(settings.virt_dev), 'wb') as virtCam:
         formatVirtualCamera(settings, virtCam, cam)
 
         # Loop over feed

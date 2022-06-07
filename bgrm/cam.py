@@ -7,6 +7,7 @@ from cv2 import \
 from numpy import shape
 from cvzone import stackImages
 from cvzone.SelfiSegmentationModule import SelfiSegmentation
+from time import sleep
 
 class Cam:
     def __init__(self, settings):
@@ -19,6 +20,9 @@ class Cam:
         self._segmentor = SelfiSegmentation()
 
         _success, baseFrame = self._vidFeed.read()
+        if not _success:
+            print('Failed to read from camera!')
+            quit()
         _height, _width, self.channels = baseFrame.shape
 
         if not settings.disableWin:
