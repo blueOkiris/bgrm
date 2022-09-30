@@ -1,6 +1,6 @@
 opencv-python==4.5.5.62
-mediapipe==0.8.9.1
+mediapipe==0.8.11
 cvzone==1.5.3
-v4l2==0.2
+v4l2-python3==0.3.1
 protobuf==3.19.0
 

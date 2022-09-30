@@ -12,28 +12,6 @@ Note, this will work anywhere WebCams are used, not just Teams
 
 ## How to Use
 
-### Flatpak Installation:
-
-Dependencies:
-    - flatpak
-    - flatpak-builder
-    - v4l2loopback
-
-1. Install - `flatpak-builder --install --user --force-clean build-dir com.blueokiris.bgrm.json`
-2. Configure v4l2loopback (may not be necessary):
-    - Recommended:
-    ```
-    export DEVICE_ARR=(`ls /sys/devices/virtual/video4linux | tr -d 'video'`); \
-    sudo modprobe v4l2loopback \
-        devices=1 exclusive_caps=1 video_nr=${DEVICE_ARR[1]} max_buffers=2 \
-        card_label=v4l2lo
-    ```
-3. Run:
-    - `flatpak run com.blueokiris.bgrm <options>` (use --help for options)
-    - Example: `flatpak run com.blueokiris.bgrm -b ~/Pictures/Wallpapers/austin-apartment-backyard-bg.jpg -w 640 -H 480 -c 1`
-
-### Manual Installation:
-
 Dependencies:
     - python >= 3.9 (3.10 is what's supported officially)
     - pip
@@ -42,7 +20,6 @@ Dependencies:
 1. Setup (skip if installing via flatpak):
    - First time you set up you need to do the following (make sure you own the folder):
    - Create the proper virtual environment with `./scripts/setup-venv.sh`
-   - Patch the v4l2 library `./scripts/patch-v4l2-py-mod.sh`
 2. Configure v4l2loopback (may not be necessary):
     - Recommended:
     ```
