@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "bgrm"
-version = "22.11.13"
+version = "3"
 description = "Remove backgrounds from video feeds in your web cam applications."
 authors = [ "Dylan Turner <dylantdmt@gmail.com>" ]
 
