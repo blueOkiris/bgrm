@@ -67,6 +67,15 @@ class Cam:
 
         return (frame, no_bg_frame, self._stack_frames(frame, no_bg_frame))
 
+    def display(self, frame):
+        if not self._settings.disable_win:
+            imshow(WIN_TITLE, frame)
+
+        if waitKey(1) & 0xFF == ord('q'):
+            return False
+
+        return True
+
     def _stack_frames(self, left_frame, right_frame):
         new_width = int(self._settings.screen_width * self._settings.view_scale)
         new_height = int(self._settings.screen_height * self._settings.view_scale)
@@ -76,15 +85,6 @@ class Cam:
                 resize(right_frame, (new_width, new_height))
             ], 1, 1
         )
-
-    def display(self, frame):
-        if not self._settings.disable_win:
-            imshow(WIN_TITLE, frame)
-
-        if waitKey(1) & 0xFF == ord('q'):
-            return False
-
-        return True
 
     # Adjust self._bg_img to be the size we want
     def _create_correctly_sized_bg(self):
