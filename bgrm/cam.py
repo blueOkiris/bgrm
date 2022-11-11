@@ -9,13 +9,15 @@ from cvzone import stackImages
 from cvzone.SelfiSegmentationModule import SelfiSegmentation
 from time import sleep
 
+WIN_TITLE = 'Feed'
+
 class Cam:
     def __init__(self, settings):
         self._settings = settings
 
         self._vidFeed = VideoCapture(settings.camera)
-        self._vidFeed.set(3, settings.screenWidth)
-        self._vidFeed.set(4, settings.screenHeight)
+        self._vidFeed.set(3, settings.screen_width)
+        self._vidFeed.set(4, settings.screen_height)
 
         self._segmentor = SelfiSegmentation()
 
@@ -25,13 +27,8 @@ class Cam:
             quit()
         _height, _width, self.channels = baseFrame.shape
 
-        if not settings.disableWin:
-            # Set window to be at a specific spot
-            namedWindow(self._settings.winTitle)
-            moveWindow(
-                self._settings.winTitle,
-                self._settings.winStartX, self._settings.winStartY
-            )
+        if not settings.disable_win:
+            namedWindow(WIN_TITLE)
     
     def __enter__(self):
         return self
@@ -41,19 +38,19 @@ class Cam:
 
         if shape(bgImg) == ():
             noBgFrame = self._segmentor.removeBG(
-                frame, self._settings.fillColor,
-                threshold = self._settings.rmThresh
+                frame, self._settings.fill_color,
+                threshold = self._settings.rm_thresh
             )
         else:
             noBgFrame = self._segmentor.removeBG(
                 frame, bgImg,
-                threshold = self._settings.rmThresh
+                threshold = self._settings.rm_thresh
             )
         return (frame, noBgFrame)
     
     def stackFrames(self, leftFrame, rightFrame):
-        newWidth = int(self._settings.screenWidth * self._settings.viewScale)
-        newHeight = int(self._settings.screenHeight * self._settings.viewScale)
+        newWidth = int(self._settings.screen_width * self._settings.view_scale)
+        newHeight = int(self._settings.screen_height * self._settings.view_scale)
         return stackImages(
             [
                 resize(leftFrame, (newWidth, newHeight)),
@@ -62,10 +59,10 @@ class Cam:
         )
     
     def display(self, frame):
-        if not self._settings.disableWin:
-            imshow(self._settings.winTitle, frame)
+        if not self._settings.disable_win:
+            imshow(WIN_TITLE, frame)
 
-        if waitKey(1) & 0xFF == self._settings.quitKey:
+        if waitKey(1) & 0xFF == ord('q'):
             return False
         return True
     

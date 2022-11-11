@@ -11,14 +11,16 @@ from v4l2 import \
     V4L2_PIX_FMT_YUV420, VIDIOC_S_FMT
 from fcntl import ioctl
 
-from cam import Cam
-from settings import AppSettings
+from bgrm.cam import Cam
+from bgrm.settings import AppSettings
+
+WIN_TITLE = 'Feed'
 
 def main():
-    settings = AppSettings.fromArguments()
+    settings = AppSettings.from_cli()
 
     # Setup a background image to plug into the cam functions
-    if settings.bgImg != '':
+    if settings.bg_img != '':
         bgImg = getCorrectlySizedBg(settings)
 
     with Cam(settings) as cam, open('/dev/video' + str(settings.virt_dev), 'wb') as virtCam:
@@ -27,7 +29,7 @@ def main():
         # Loop over feed
         while True:
             # Get cam feed
-            if not settings.blur and settings.bgImg != '':
+            if not settings.blur and settings.bg_img != '':
                 frame, noBgFrame = cam.getFrame(bgImg)
             else:
                 frame, noBgFrame = cam.getFrame()
@@ -52,11 +54,11 @@ def formatVirtualCamera(settings, virtCam, actualCam):
     format.type = V4L2_BUF_TYPE_VIDEO_OUTPUT
     format.fmt.pix.field = V4L2_FIELD_NONE
     format.fmt.pix.pixelformat = V4L2_PIX_FMT_YUV420
-    format.fmt.pix.width = settings.screenWidth
-    format.fmt.pix.height = settings.screenHeight
-    format.fmt.pix.bytesperline = settings.screenWidth * actualCam.channels
+    format.fmt.pix.width = settings.screen_width
+    format.fmt.pix.height = settings.screen_height
+    format.fmt.pix.bytesperline = settings.screen_width * actualCam.channels
     format.fmt.pix.sizeimage = \
-        settings.screenWidth * settings.screenHeight * actualCam.channels
+        settings.screen_width * settings.screen_height * actualCam.channels
     
     # Set device format
     print('Format loopback format result (0 good): {}'.format(
@@ -64,25 +66,25 @@ def formatVirtualCamera(settings, virtCam, actualCam):
     ))
 
 def getCorrectlySizedBg(settings):
-    bgImg = imread(settings.bgImg)
+    bgImg = imread(settings.bg_img)
 
     # Scale to match y and be centered
     bgHeight, bgWidth, _channels = bgImg.shape
     aspect = float(bgWidth) / float(bgHeight)
-    newWidth = int(settings.screenHeight * aspect)
-    bgImg = resize(bgImg, (newWidth, settings.screenHeight))
+    newWidth = int(settings.screen_height * aspect)
+    bgImg = resize(bgImg, (newWidth, settings.screen_height))
 
     # Scale down
-    if newWidth > settings.screenWidth:
-        startx = int((newWidth - settings.screenWidth) / 2)
+    if newWidth > settings.screen_width:
+        startx = int((newWidth - settings.screen_width) / 2)
         endx = newWidth - startx
-        bgImg = bgImg[0:settings.screenHeight, startx:endx]
+        bgImg = bgImg[0:settings.screen_height, startx:endx]
     else:
-        padding = int((settings.screenWidth - newWidth) / 2)
+        padding = int((settings.screen_width - newWidth) / 2)
         bgImg = copyMakeBorder(
             bgImg, 0, 0, padding, padding, BORDER_CONSTANT
         )
     
     # Make sure correct size
-    bgImg = resize(bgImg, (settings.screenWidth, settings.screenHeight))
+    bgImg = resize(bgImg, (settings.screen_width, settings.screen_height))
     return bgImg
