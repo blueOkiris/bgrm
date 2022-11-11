@@ -15,10 +15,9 @@ Note, this will work anywhere WebCams are used, not just Teams
 Dependencies:
     - python >= 3.8 (3.10 is what's supported officially)
     - pip
-    - poetry
     - v4l2loopback
 
-Build steps:
+Setup:
 1. Configure v4l2loopback (may not be necessary):
     - Recommended something like this:
     ```
@@ -27,10 +26,16 @@ Build steps:
         devices=1 exclusive_caps=1 video_nr=${DEVICE_ARR[1]} max_buffers=2 \
         card_label=v4l2lo
     ```
-3. Build with `poetry build` or alternatively grab the latest release
-4. Install: `pip install dist/*.whl`
+2. Install with `pip install bgrm`
 
 Then, you can run: 
 - Run with `python -m bgrm <options>` (use `--help` to see all options)
 - Example: `python -m bgrm -b ~/Pictures/Wallpapers/ni-skyline-wallpaper.png -w 320 -H 240 -s 2.0`
 
+## Build from Repo
+
+You can also build the package yourself from source (or grab the latest version from the releases tab)
+
+To do that you need the "poetry" build system.
+
+Run `poetry build` and install the whl from the dist/ folder
