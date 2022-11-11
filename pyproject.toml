@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "bgrm"
+version = "22.11.1"
+description = "Remove backgrounds from video feeds in your web cam applications."
+authors = [ "Dylan Turner <dylantdmt@gmail.com>" ]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+opencv-python = "4.6.0.66"
+mediapipe = "0.8.11"
+cvzone = "1.5.3"
+v4l2-python3 = "0.3.1"
+protobuf = "3.19.0"
+
+[build-system]
+requires = [ "poetry-core" ]
+build-backend = "poetry.core.masonry.api"
+
