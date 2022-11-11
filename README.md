@@ -10,7 +10,11 @@ Using OpenCV and a v4l2loopback device (basically a virtual webcam you can write
 
 Note, this will work anywhere WebCams are used, not just Teams
 
+Now, the program can also be used to remove backgrounds from video files and save them as video files as well!
+
 ## How to Use
+
+### WebCam Replacement
 
 Dependencies:
     - python >= 3.8 (3.10 is what's supported officially)
@@ -31,6 +35,12 @@ Setup:
 Then, you can run: 
 - Run with `python -m bgrm <options>` (use `--help` to see all options)
 - Example: `python -m bgrm -b ~/Pictures/Wallpapers/ni-skyline-wallpaper.png -w 320 -H 240 -s 2.0`
+
+### File Replacement
+
+You can also remove the background from video files. It works just like the WebCam, but instead of setting the `--camera` cli arg, you call the program like this:
+
+`python -m bgrm --file_mode -i <input file> -o <output file> <other options>`
 
 ## Build from Repo
 

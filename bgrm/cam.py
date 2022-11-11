@@ -5,7 +5,7 @@ from cv2 import \
     VideoCapture, resize, namedWindow, moveWindow, imshow, waitKey, \
     destroyAllWindows, imread, BORDER_CONSTANT, copyMakeBorder, resize, imread, \
     GaussianBlur
-from numpy import shape
+from numpy import shape, uint8
 from cvzone import stackImages
 from cvzone.SelfiSegmentationModule import SelfiSegmentation
 from time import sleep
@@ -17,11 +17,11 @@ class Cam:
         # Set up WebCam access and output
         self._settings = settings
 
-        self._vidFeed = VideoCapture(settings.camera)
-        self._vidFeed.set(3, settings.screen_width)
-        self._vidFeed.set(4, settings.screen_height)
+        self._vid_feed = VideoCapture(settings.camera)
+        self._vid_feed.set(3, settings.screen_width)
+        self._vid_feed.set(4, settings.screen_height)
 
-        _success, baseFrame = self._vidFeed.read()
+        _success, baseFrame = self._vid_feed.read()
         if not _success:
             print('Failed to read from camera!')
             quit()
@@ -42,12 +42,15 @@ class Cam:
         return self
 
     def __exit__(self, exc_type, exc_value, traceback):
-        self._vidFeed.release()
+        self._vid_feed.release()
         destroyAllWindows()
 
     # Return regular camera frame and with the bg removal applied, as well as them put together
     def frames(self):
-        _success, frame = self._vidFeed.read()
+        success, frame = self._vid_feed.read()
+
+        if not success:
+            return (None, None, None)
 
         if shape(self._bg_img) == ():
             no_bg_frame = self._segmentor.removeBG(
