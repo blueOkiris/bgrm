@@ -1,4 +1,4 @@
-from bgrm import main
+from bgrm.bgrm import main
 
 if __name__ == '__main__':
     main()

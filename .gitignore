@@ -3,6 +3,9 @@
 *.ko
 *.venv*
 
+# Poetry stuff:
+dist/
+
 # Flatpak stuff
 .flatpak-builder/
 build-dir/
