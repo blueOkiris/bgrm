@@ -27,7 +27,7 @@ Build steps:
         devices=1 exclusive_caps=1 video_nr=${DEVICE_ARR[1]} max_buffers=2 \
         card_label=v4l2lo
     ```
-3. Build: `poetry build`
+3. Build with `poetry build` or alternatively grab the latest release
 4. Install: `pip install dist/*.whl`
 
 Then, you can run: 
