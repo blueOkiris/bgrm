@@ -3,6 +3,11 @@ name = "bgrm"
 version = "5"
 description = "Remove backgrounds from video feeds in your web cam applications."
 authors = [ "Dylan Turner <dylantdmt@gmail.com>" ]
+license = "GPL-3.0-only"
+readme = "README.md"
+homepage = "https://github.com/blueOkiris/bgrm"
+repository = "https://github.com/blueOkiris/bgrm"
+keywords = [ "bgrm", "background", "removal", "teams", "linux", "mediapipe", "opencv", "bg", "rm" ]
 
 [tool.poetry.dependencies]
 python = "^3.8"
