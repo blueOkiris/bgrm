@@ -91,22 +91,22 @@ class Cam:
         bg_img = imread(self._settings.bg_img)
 
         # Scale to match y and be centered
-        bg_height, bg_width, _channels = self._bg_img.shape
+        bg_height, bg_width, _channels = bg_img.shape
         aspect = float(bg_width) / float(bg_height)
         new_width = int(self._settings.screen_height * aspect)
-        bg_img = resize(bg_img, (new_width, settings.screen_height))
+        bg_img = resize(bg_img, (new_width, self._settings.screen_height))
 
         # Scale down
-        if new_width > settings.screen_width:
-            startx = int((new_width - settings.screen_width) / 2)
+        if new_width > self._settings.screen_width:
+            startx = int((new_width - self._settings.screen_width) / 2)
             endx = new_width - startx
-            bg_img = bg_img[0:settings.screen_height, startx:endx]
+            bg_img = bg_img[0:self._settings.screen_height, startx:endx]
         else:
-            padding = int((settings.screen_width - new_width) / 2)
+            padding = int((self._settings.screen_width - new_width) / 2)
             bg_img = copyMakeBorder(bg_img, 0, 0, padding, padding, BORDER_CONSTANT)
 
         # Make sure correct size
-        bg_img = resize(bg_img, (settings.screen_width, settings.screen_height))
+        bg_img = resize(bg_img, (self._settings.screen_width, self._settings.screen_height))
 
         return bg_img
 
