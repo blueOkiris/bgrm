@@ -17,6 +17,10 @@ class AppSettings:
     bg_img: str
     blur: bool
     disable_win: bool
+    file_mode: bool
+    input_file: str
+    output_file: str
+    fps: int
 
     @staticmethod
     def from_cli():
@@ -32,7 +36,8 @@ class AppSettings:
 
         return AppSettings(
             virt_dev, args.camera, args.width, args.height, args.scale,
-            args.thresh, fill_col, args.bg, args.blur, args.disable_window
+            args.thresh, fill_col, args.bg, args.blur, args.disable_window,
+            args.file_mode, args.input, args.output, args.fps
         )
 
 # Get video settings from command line
@@ -89,6 +94,25 @@ def cli_args():
     parser.add_argument(
         '-C', '--color', type = str, default = '0,0,0',
         help = 'List of R, G, B to replace background with',
+    )
+
+    # File versions
+    parser.add_argument(
+        '--file_mode',
+        help = 'Remove the background from video files instead of cameras (overrides --camera)',
+        action = 'store_true'
+    )
+    parser.add_argument(
+        '-i', '--input', type = str, default = '',
+        help = 'Only used with file mode. Input file to remove background',
+    )
+    parser.add_argument(
+        '-o', '--output', type = str, default = '',
+        help = 'Only used with file mode. Output file to store removed background feed.'
+    )
+    parser.add_argument(
+        '-f', '--fps', type = int, default = 30,
+        help = 'Only used with file mode. Output file fps'
     )
 
     # Mostly useless window options
