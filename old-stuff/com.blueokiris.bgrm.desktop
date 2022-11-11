@@ -1,9 +1,0 @@
-[Desktop Entry]
-Name=bgrm
-Exec=bgrm-fp.sh %U
-Icon=com.blueokiris.bgrm
-Comment=Remove background from web cam in real time for use in video call and recording applications.
-Terminal=true
-Categories=Video
-X-Flatpak=com.blueokiris.bgrm
-
