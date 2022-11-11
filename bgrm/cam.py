@@ -88,7 +88,7 @@ class Cam:
 
     # Adjust self._bg_img to be the size we want
     def _create_correctly_sized_bg(self):
-        bg_img = imread(settings.bgImg)
+        bg_img = imread(self._settings.bg_img)
 
         # Scale to match y and be centered
         bg_height, bg_width, _channels = self._bg_img.shape
