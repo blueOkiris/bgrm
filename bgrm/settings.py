@@ -1,6 +1,7 @@
 # Author: Dylan Turner
 # Description: Keep app settings in one place
 
+from typing import Tuple
 from dataclasses import dataclass
 from argparse import ArgumentParser
 from subprocess import run, PIPE
@@ -13,7 +14,7 @@ class AppSettings:
     screen_height: int
     view_scale: float
     rm_thresh: float
-    fill_color: tuple[float, float, float]
+    fill_color: Tuple[float, float, float]
     bg_img: str
     blur: bool
     disable_win: bool
