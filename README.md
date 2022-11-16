@@ -18,7 +18,9 @@ Now, the program can also be used to remove backgrounds from video files and sav
 
 Dependencies:
   - x86 or x64 only (mediapipe, a dependency, doesn't support ARM)
-  - python >= 3.8 and < 3.11. 3.10 is what's supported officially; 3.11 is broken due to mediapipe not supporting it yet
+  - python >= 3.8 and < 3.11
+    + 3.10 is what's supported officially
+    + 3.11 is broken due to mediapipe not supporting it yet
   - pip
   - v4l2loopback
 
