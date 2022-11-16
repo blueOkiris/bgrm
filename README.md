@@ -17,7 +17,7 @@ Now, the program can also be used to remove backgrounds from video files and sav
 ### WebCam Replacement
 
 Dependencies:
-    - python >= 3.8 (3.10 is what's supported officially)
+    - python >= 3.8 and < 3.11. 3.10 is what's supported officially; 3.11 is broken due to mediapipe not supporting it yet
     - pip
     - v4l2loopback
 
