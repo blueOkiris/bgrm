@@ -20,9 +20,7 @@ Dependencies:
   - x86 or x64 only as mediapipe, a dependency, doesn't support ARM
     + Although, there are versions of mediapipe that may work if you have Apple Silicon or a Raspberry Pi
     + If on ARM, you'll have to install from the GitHub source and modify pyproject.toml to use a custom mediapipe library like [mediapipe-silicon](https://pypi.org/project/mediapipe-silicon/) or [mediapipe-rpi4](https://pypi.org/project/mediapipe-rpi4/)  or something else
-  - python >= 3.8 and < 3.11
-    + 3.10 is what's supported officially
-    + 3.11 is broken due to mediapipe not supporting it yet
+  - python >= 3.8 (3.11 is what's supported officially)
   - pip
   - v4l2loopback
 
